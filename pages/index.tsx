@@ -185,14 +185,6 @@ export default function Home() {
 
               <button className="button-add flex items-center gap-2" onClick={goToRequest}>
 
-                <Image
-                  aria-hidden
-                  src="/plus.svg"
-                  alt="plus icon"
-                  width={40}
-                  height={40}
-                /> 
-
                 <span className="request-text">add a job</span>
 
               </button>
@@ -222,7 +214,7 @@ export default function Home() {
             
                         <Image
                           aria-hidden
-                          src={`/${item.job_image}.svg`}
+                          src={`${item.job_image}`}
                           alt={`/${item.company_name} logo`}
                           width={32}
                           height={32}

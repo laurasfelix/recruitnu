@@ -113,7 +113,7 @@ export default function Request() {
                     {questionCounter == 0 && <div className={`inputNew ${transitionState}`}>
 
                         <label htmlFor="companyName" style={{ display: "block", marginBottom: "5px" }}>
-                                what&apos;s the company's name?
+                                what&apos;s the company&apos;s name?
                         </label>
 
                         <input

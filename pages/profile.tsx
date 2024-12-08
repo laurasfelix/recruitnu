@@ -23,8 +23,8 @@ export default function Profile() {
   const [loading, setLoading] = useState(true);
   const [username, setUsername] = useState("wildcat");
   const [userId, setUserId] = useState("");
-  const [createdList, setCreatedList] = useState<job[]>([]);
-  const [appliedList, setAppliedList] = useState<job[]>([]);
+  const [createdList, setCreatedList] = useState<Job[]>([]);
+  const [appliedList, setAppliedList] = useState<Job[]>([]);
   const [token, setToken] = useState("invalid");
   const router = useRouter();
 
@@ -161,7 +161,7 @@ useEffect(() => {
             ))}
           </div>
         ) : (
-          <p className="text-center">Haven't applied to jobs yet.</p>
+          <p className="text-center">Haven&apos;t applied to jobs yet.</p>
         )}
       </section>
 

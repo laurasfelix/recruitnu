@@ -1,1 +1,1 @@
-export const API_URL = "http://work-env.eba-4zj5h2kc.us-west-2.elasticbeanstalk.com/api";
+export const API_URL = "/api";

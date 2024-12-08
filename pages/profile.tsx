@@ -17,6 +17,7 @@ export default function Profile() {
     job_link: string;
     job_image: string;
     company_name: string;
+    compatibility_score: string;
   
   }
  const [isLoggedIn, setIsLoggedIn] = useState(false);
@@ -121,7 +122,7 @@ useEffect(() => {
     <div className="grid grid-cols-1 md:grid-cols-3 gap-8 w-full">
 
       <section className="h-[300px] overflow-y-auto border p-4 rounded-md shadow-md">
-        <h2 className="text-xl font-semibold mb-4 text-center profile-effect">jobs Accepted</h2>
+        <h2 className="text-xl font-semibold mb-4 text-center profile-effect">jobs created</h2>
         {createdList.length > 0 ? (
           <div className="grid grid-cols-1 gap-4">
             {createdList.map((job, index) => (
@@ -144,7 +145,7 @@ useEffect(() => {
 
 
       <section className="h-[300px] overflow-y-auto border p-4 rounded-md  shadow-md">
-        <h2 className="text-xl font-semibold mb-4 text-center profile-effect">In jobs</h2>
+        <h2 className="text-xl font-semibold mb-4 text-center profile-effect">jobs applied</h2>
         {appliedList.length > 0 ? (
           <div className="grid grid-cols-1 gap-4">
             {appliedList.map((job, index) => (
@@ -156,6 +157,7 @@ useEffect(() => {
                 <p>company name: {job.company_name}</p>
                 <p>job type: {job.job_type}</p>
                 <p>location: {job.location}</p>
+                <p>compatibility score: {job.compatibility_score}</p>
               </div>
               </div>
             ))}

@@ -17,7 +17,7 @@ export default function Profile() {
     job_link: string;
     job_image: string;
     company_name: string;
-    compatibility_score: string;
+    compatibility_score: number;
   
   }
  const [isLoggedIn, setIsLoggedIn] = useState(false);

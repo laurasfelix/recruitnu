@@ -7,6 +7,12 @@ import { useEffect, useState } from "react";
 import { isTokenValid, getName, getUserId } from "../utils/auth";
 import { API_URL } from "../utils/constants";
 
+const axiosInstance = axios.create({
+  baseURL: API_URL,
+  headers: {
+    "Content-Type": "application/json",
+  },
+});
 
 
 export default function Home() {
@@ -51,7 +57,7 @@ export default function Home() {
         console.log("TOKEN", token);
         console.log("user_id:", user_id);
         console.log("new user_id:", userId);
-        const res = await axios.put(`${API_URL}/apply_job`, {
+        const res = await axiosInstance.put(`${API_URL}/apply_job`, {
           user_id: user_id, 
           job_id: job_id,
         }, {
@@ -86,7 +92,7 @@ export default function Home() {
 
     try {
       console.log("TOKEN", token)
-      const res = await axios.get(`${API_URL}/get_jobs_field`, { params: { user_id: userId },
+      const res = await axiosInstance.get(`${API_URL}/get_jobs_field`, { params: { user_id: userId },
         headers: {
           "Authorization": `${token}`,
         }});

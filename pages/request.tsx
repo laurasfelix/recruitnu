@@ -7,6 +7,13 @@ import axios from "axios";
 import { API_URL } from "../utils/constants";
 import { getUserId } from "../utils/auth";
 
+const axiosInstance = axios.create({
+    baseURL: API_URL,
+    headers: {
+      "Content-Type": "application/json",
+    },
+  });
+
 
 export default function Request() {
 
@@ -63,7 +70,7 @@ export default function Request() {
         e.preventDefault();
     
         try {
-          const res = await axios.post(`${API_URL}/add_job`, {
+          const res = await axiosInstance.post(`${API_URL}/add_job`, {
             job_type: jobType,
             user_id: userId,
             location,

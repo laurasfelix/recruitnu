@@ -7,6 +7,13 @@ import { useRouter } from "next/router";
 import Image from "next/image";
 import axios from "axios";
 
+const axiosInstance = axios.create({
+  baseURL: API_URL,
+  headers: {
+    "Content-Type": "application/json",
+  },
+});
+
 export default function Profile() {
   interface Job {
     user_id: string;
@@ -73,7 +80,7 @@ useEffect(() => {
 
     try {
       console.log("TOKEN", token)
-      const res = await axios.get(`${API_URL}/get_user_jobs`, { params: { user_id: userId },
+      const res = await axiosInstance.get(`${API_URL}/get_user_jobs`, { params: { user_id: userId },
         headers: {
           "Authorization": `${token}`,
         }});

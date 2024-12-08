@@ -5,6 +5,13 @@ import {useState } from "react";
 import axios from "axios";
 import { API_URL } from "../utils/constants";
 
+const axiosInstance = axios.create({
+  baseURL: API_URL,
+  headers: {
+    "Content-Type": "application/json",
+  },
+});
+
 export default function Register(){
     
 
@@ -29,7 +36,7 @@ export default function Register(){
         console.log("Form submitted!");
     
         try {
-          const res = await axios.post(`${API_URL}/add_user`, {
+          const res = await axiosInstance.post(`${API_URL}/add_user`, {
             given_name: givenName,
             last_name: lastName,
             phone_number: phoneNumber,

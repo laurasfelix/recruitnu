@@ -6,6 +6,12 @@ import { useState } from "react";
 import axios from "axios";
 import { API_URL } from "../utils/constants";
 
+const axiosInstance = axios.create({
+  baseURL: API_URL,
+  headers: {
+    "Content-Type": "application/json",
+  },
+});
 
 export default function Auth(){
     
@@ -24,7 +30,7 @@ export default function Auth(){
         e.preventDefault();
     
         try {
-          const res = await axios.post(`${API_URL}/login`, {
+          const res = await axiosInstance.post(`${API_URL}/login`, {
             email,
             password,
           }, {

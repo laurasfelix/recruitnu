@@ -11,6 +11,10 @@ export default function Register(){
     const [email, setEmail] = useState('');
     const [givenName, setGivenName] = useState('');
     const [lastName, setLastName] = useState('');
+    const [year, setYear] = useState(1);
+    const [gpa, setGPA] = useState(1.0);
+    const [major, setMajor] = useState('');
+    const [skills, setSkills] = useState<string[]>([]);
     const [password, setPassword] = useState('');
     const [phoneNumber, setPhoneNumber] = useState('');
     const [errorMessage, setErrorMessage] = useState('');
@@ -22,6 +26,7 @@ export default function Register(){
 
     const handleRegister = async (e: React.FormEvent<HTMLFormElement>) => {
         e.preventDefault();
+        console.log("Form submitted!");
     
         try {
           const res = await axios.post(`${API_URL}/add_user`, {
@@ -30,6 +35,10 @@ export default function Register(){
             phone_number: phoneNumber,
             email,
             password,
+            year, 
+            gpa, 
+            major, 
+            skills, 
           },  {
             headers: {
               "Content-Type": "application/json",
@@ -68,7 +77,7 @@ export default function Register(){
     return (
         <div className="grid grid-rows-[20px_1fr_20px] items-center justify-items-center min-h-screen p-8 pb-20 gap-16 sm:p-10 font-[family-name:var(--font-geist-sans)]">
             <main className="flex flex-col gap-8 row-start-2 items-center">
-            {errorMessage && <p className="error-message">{errorMessage}</p>} {/* Display error message */}
+            {errorMessage && <p className="error-message">{errorMessage}</p>} 
 
                 <form onSubmit={handleRegister} className="form-request">
 
@@ -125,9 +134,78 @@ export default function Register(){
                             size={Math.max(email.length, "johnevans1851@u.northwestern.edu".length)}
                             />
 
-                
+                    </div>
+
+                    <div className="inputContainer">
+
+                        <label htmlFor="year" style={{ display: "block", marginBottom: "5px" }}>
+                                year:
+                        </label>
+
+                        <select className="inputBox" value={year} name="year" onChange={(ev) => setYear(Number(ev.target.value))}>
+                        <option value="0" disabled>select an option</option>
+                            <option value="1">freshman</option>
+                            <option value="2">sophomore</option>
+                            <option value="3">junior</option>
+                            <option value="4">senior</option>
+
+                        </select>
 
                     </div>
+
+                    <div className="inputContainer">
+
+                      <label htmlFor="major" style={{ display: "block", marginBottom: "5px" }}>
+                              major:
+                      </label>
+
+                          <input
+                          type="major"
+                          value={major}
+                          placeholder="Computer Science"
+                          onChange={(ev) => setMajor(ev.target.value)}
+                          className={'inputBox'}
+                          size={Math.max(email.length, "johnevans1851@u.northwestern.edu".length)}
+                          />
+
+                      </div>
+
+                      <div className="inputContainer">
+
+                        <label htmlFor="gpa" style={{ display: "block", marginBottom: "5px" }}>
+                                gpa:
+                        </label>
+
+                            <input
+                            type="number"
+                            value={gpa}
+                            placeholder="3.4"
+                            onChange={(ev) => setGPA(Number(ev.target.value))}
+                            className={'inputBox'}
+                            step="0.01"  
+                            min="1.0"     
+                            max="4.0"
+                            size={Math.max(email.length, "johnevans1851@u.northwestern.edu".length)}
+                            />
+
+                      </div>
+
+                      <div className="inputContainer">
+
+                        <label htmlFor="text" style={{ display: "block", marginBottom: "5px" }}>
+                                skills:
+                        </label>
+
+                            <input
+                            type="text"
+                            value={skills}
+                            placeholder="Javascript, Python, C++"
+                            onChange={(ev) => setSkills((ev.target.value.split(",").map(skill => skill.trim())))}
+                            className={'inputBox'}
+                            size={Math.max(email.length, "johnevans1851@u.northwestern.edu".length)}
+                            />
+
+                        </div>
 
                     <div className="inputContainer">
 
@@ -168,7 +246,7 @@ export default function Register(){
                     </div>
 
                     <div className={'inputContainer'}>
-                        <button type="submit">
+                        <button type="submit" onClick={() => console.log("Register button clicked")}>
                             <p className="hover:text-lg hover:bg-purple-700">
                             register!
                             </p>

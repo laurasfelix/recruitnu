@@ -24,11 +24,11 @@ export default function Index() {
             <main className="flex flex-col gap-8 row-start-2 items-center">
                 <div className="welcome">
                     <p className="first-phrases text-2xl hover:text-3xl shared-hover-effect">
-                    welcome to puterfish
+                    welcome to recruitNU
                     </p>
 
                     <p className="second-phrases text-xl ">
-                    northwestern&apos;s recycling center
+                    northwestern&apos;s recruiting endpoint
                     </p>
                 </div>
 

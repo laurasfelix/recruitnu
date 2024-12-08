@@ -12,11 +12,11 @@ export default function Request() {
 
 
     const [userId, setUserId] = useState('');
-    const [availability, setAvailability] = useState('');
+    const [jobLink, setJobLink] = useState('');
     const [location, setLocation] = useState('');
-    const [materialType, setMaterialType] = useState('');
-    const [requestType, setRequestType] = useState('');
-    const [quantity, setQuantity] = useState('');
+    const [jobType, setjobType] = useState('');
+    const [companyName, setCompanyName] = useState('');
+    const [description, setDescription] = useState('');
     const [errorMessage, setErrorMessage] = useState('');
     const [transitionState, setTransitionState] = useState("active");
     const router = useRouter();
@@ -63,13 +63,13 @@ export default function Request() {
         e.preventDefault();
     
         try {
-          const res = await axios.post(`${API_URL}/add_material`, {
-            request_type: requestType,
-            material_type: materialType,
+          const res = await axios.post(`${API_URL}/add_job`, {
+            job_type: jobType,
             user_id: userId,
             location,
-            availability,
-            quantity,
+            description,
+            job_link: jobLink,
+            company_name: companyName, 
           },  {
             headers: {
               "Content-Type": "application/json",
@@ -77,7 +77,7 @@ export default function Request() {
      
           console.log(res.data); 
 
-          if (res.data.material_type) {
+          if (res.data.job_type) {
             console.log("worked")
             router.push("/");
           } else {
@@ -112,15 +112,18 @@ export default function Request() {
 
                     {questionCounter == 0 && <div className={`inputNew ${transitionState}`}>
 
-                        <label htmlFor="requestType" style={{ display: "block", marginBottom: "5px" }}>
-                                are you looking for a material or giving away one?
+                        <label htmlFor="companyName" style={{ display: "block", marginBottom: "5px" }}>
+                                what&apos;s the company's name?
                         </label>
 
-                        <select className="select" value={requestType} name="requestType" onChange={(ev) => setRequestType(ev.target.value)}>
-                           <option value="" disabled>select an option</option>
-                            <option value="in">looking for</option>
-                            <option value="out">giving away</option>
-                        </select>
+                        <input
+                            type="name"
+                            value={companyName}
+                            placeholder="Google"
+                            onChange={(ev) => setCompanyName(ev.target.value)}
+                            className={'inputBoxNew'}
+                            size={Math.max(location.length, "Technological Institute".length)}
+                        />
 
                         <div className="first-button">
 
@@ -145,19 +148,15 @@ export default function Request() {
 
                     {questionCounter == 1 && <div className={`inputNew ${transitionState}`}>
 
-                        <label htmlFor="materialType" style={{ display: "block", marginBottom: "5px" }}>
-                                what type of material is it?
+                        <label htmlFor="jobType" style={{ display: "block", marginBottom: "5px" }}>
+                                what type of job is it?
                         </label>
 
-                        <select className="select" value={materialType} name="materialType" onChange={(ev) => setMaterialType(ev.target.value)}>
+                        <select className="select" value={jobType} name="jobType" onChange={(ev) => setjobType(ev.target.value)}>
                         <option value="" disabled>select an option</option>
-                            <option value="wood">wood</option>
-                            <option value="metal">metal</option>
-                            <option value="plywood">plywood</option>
-                            <option value="aluminum">aluminum</option>
-                            <option value="sheet_metal">sheet metal</option>
-                            <option value="acrylic">acrylic</option>
-                            <option value="foam_core">foam core</option>
+                            <option value="new grad">new grad</option>
+                            <option value="internship">internship</option>
+                            <option value="externship">externship</option>
                         </select>
 
                         <div className="normal-button">
@@ -204,7 +203,7 @@ export default function Request() {
                             <input
                             type="name"
                             value={location}
-                            placeholder="Technological Institute"
+                            placeholder="Pasadena, CA"
                             onChange={(ev) => setLocation(ev.target.value)}
                             className={'inputBoxNew'}
                             size={Math.max(location.length, "Technological Institute".length)}
@@ -249,16 +248,16 @@ export default function Request() {
                     {questionCounter == 3 && <div className={`inputNew ${transitionState}`}>
 
                         <label htmlFor="quantity" style={{ display: "block", marginBottom: "5px" }}>
-                                what&apos;s the quantity/weight?
+                                what&apos;s the job description? feel free to paste it there
                         </label>
 
                             <input
                             type="name"
-                            value={quantity}
-                            placeholder="10 kg"
-                            onChange={(ev) => setQuantity(ev.target.value)}
+                            value={description}
+                            placeholder="bla bla bla"
+                            onChange={(ev) => setDescription(ev.target.value)}
                             className={'inputBoxNew'}
-                            size={Math.max(quantity.length, "Technological Institute".length)}
+                            size={Math.max(description.length, "Technological Institute".length)}
                             />
 
 
@@ -282,7 +281,7 @@ export default function Request() {
                     </div>
 
                     <div>
-                        {quantity != "" && <button
+                        {description != "" && <button
                          type="button"
                             onClick={handleNext}
                             className=" hover:underline hover:underline-offset-4"
@@ -302,19 +301,19 @@ export default function Request() {
 
                     {questionCounter == 4 && <div className={`inputNew ${transitionState}`}>
 
-                        <label htmlFor="availability" style={{ display: "block", marginBottom: "5px" }}>
-                        how soon is it available?
+                        <label htmlFor="jobLink" style={{ display: "block", marginBottom: "5px" }}>
+                        what&apos;s the link?
                         </label>
 
-                        <select className="select" name="availability" value={availability} onChange={(ev) => setAvailability(ev.target.value)}>
-                            <option value="" disabled>select an option</option>
-                            <option value="0">now</option>
-                            <option value="1">tomorrow</option>
-                            <option value="2">this week</option>
-                            <option value="3">next week</option>
-                            <option value="4">next month</option>
-                            <option value="4">next quarter</option>
-                        </select>
+                        <input
+                            type="name"
+                            value={jobLink}
+                            placeholder="google.com/internship"
+                            onChange={(ev) => setJobLink(ev.target.value)}
+                            className={'inputBoxNew'}
+                            size={Math.max(description.length, "Technological Institute".length)}
+                            />
+
 
                         <div className="normal-button">
                     

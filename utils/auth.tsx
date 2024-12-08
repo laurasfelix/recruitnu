@@ -47,9 +47,12 @@ export function getUserId() {
 
 export async function getName(){
   const token = localStorage.getItem("token");
+  console.log("NAME and token", token);
   if (!token) return "wildcat";
+  console.log("passed");
   const decodedToken = jwtDecode<CustomJwtPayload>(token);
   const user_id = decodedToken.user_id || "";
+  
 
   try {
     const res = await axiosInstance.get(`/get_user`, {
@@ -58,9 +61,9 @@ export async function getName(){
       }
     });
 
-    if (res.data && res.data.user && res.data.user[0]?.given_name) {
-      console.log(res.data);
-      return res.data.user[0].given_name;
+    if (res.data && res.data.user) {
+      console.log("NAME",res.data);
+      return res.data.user.given_name;
     }
     
 

@@ -7,6 +7,7 @@ import axios from "axios";
 import { API_URL } from "../utils/constants";
 import { getUserId } from "../utils/auth";
 
+
 const axiosInstance = axios.create({
     baseURL: API_URL,
     headers: {
@@ -26,9 +27,16 @@ export default function Request() {
     const [description, setDescription] = useState('');
     const [errorMessage, setErrorMessage] = useState('');
     const [transitionState, setTransitionState] = useState("active");
+    const [token, setToken] = useState("invalid");
     const router = useRouter();
 
     const [questionCounter, setQuestionCounter] = useState(0);
+    useEffect(() => {
+    console.log("setting token");
+    const savedToken = localStorage.getItem("token");
+    setToken(savedToken || "invalid");
+    console.log("token=", token);
+    }, [token]);
 
     const handleBack = () => {
         router.push("/");
@@ -80,6 +88,7 @@ export default function Request() {
           },  {
             headers: {
               "Content-Type": "application/json",
+              "Authorization": `${token}`
             }});
      
           console.log(res.data); 

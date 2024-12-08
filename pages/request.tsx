@@ -22,6 +22,7 @@ export default function Request() {
     const [userId, setUserId] = useState('');
     const [jobLink, setJobLink] = useState('');
     const [location, setLocation] = useState('');
+    const [field, setField] = useState('');
     const [jobType, setjobType] = useState('');
     const [companyName, setCompanyName] = useState('');
     const [description, setDescription] = useState('');
@@ -85,6 +86,8 @@ export default function Request() {
             description,
             job_link: jobLink,
             company_name: companyName, 
+            fields: [field],
+
           },  {
             headers: {
               "Content-Type": "application/json",
@@ -316,6 +319,58 @@ export default function Request() {
                     </div>}
 
                     {questionCounter == 4 && <div className={`inputNew ${transitionState}`}>
+
+                        <label htmlFor="quantity" style={{ display: "block", marginBottom: "5px" }}>
+                                what&apos;s the job's field?
+                        </label>
+
+                        <select className="select" value={field} name="jobType" onChange={(ev) => setField(ev.target.value)}>
+                        <option value="" disabled>select an option</option>
+                            <option value="STEM">STEM</option>
+                            <option value="Humanities">Humanities</option>
+                            <option value="Fine Arts">Fine Arts</option>
+                        </select>
+
+
+                    <div className="normal-button">
+                    
+
+                    <div>
+
+                        <button
+                                onClick={handlePrevious}
+                                type="button"
+                                className=" hover:underline hover:underline-offset-4"
+                                >
+                                ← back
+                        </button>
+
+                    </div>
+
+                    <div>
+
+                    </div>
+
+                    <div>
+                        {description != "" && <button
+                         type="button"
+                            onClick={handleNext}
+                            className=" hover:underline hover:underline-offset-4"
+                            >
+                            → next
+                        </button>}
+
+                    </div>
+
+                </div>
+
+
+
+
+
+                    </div>}
+
+                    {questionCounter == 5 && <div className={`inputNew ${transitionState}`}>
 
                         <label htmlFor="jobLink" style={{ display: "block", marginBottom: "5px" }}>
                         what&apos;s the link?

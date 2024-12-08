@@ -3,6 +3,14 @@ import { JwtPayload } from "jwt-decode";
 import { API_URL } from "./constants";
 import axios from "axios";
 
+
+const axiosInstance = axios.create({
+    baseURL: API_URL,
+    headers: {
+      "Content-Type": "application/json",
+    },
+  });
+
 export interface CustomJwtPayload extends JwtPayload {
   user_id?: string;
 }
@@ -44,7 +52,7 @@ export async function getName(){
   const user_id = decodedToken.user_id || "";
 
   try {
-    const res = await axios.get(`${API_URL}/get_user`, {
+    const res = await axiosInstance.get(`/get_user`, {
       params:{
       user_id, 
       }

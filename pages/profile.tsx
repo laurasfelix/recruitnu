@@ -80,7 +80,7 @@ useEffect(() => {
 
     try {
       console.log("TOKEN", token)
-      const res = await axiosInstance.get(`${API_URL}/get_user_jobs`, { params: { user_id: userId },
+      const res = await axiosInstance.get(`/get_user_jobs`, { params: { user_id: userId },
         headers: {
           "Authorization": `${token}`,
         }});

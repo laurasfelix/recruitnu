@@ -70,7 +70,7 @@ export default function Request() {
         e.preventDefault();
     
         try {
-          const res = await axiosInstance.post(`${API_URL}/add_job`, {
+          const res = await axiosInstance.post(`/add_job`, {
             job_type: jobType,
             user_id: userId,
             location,

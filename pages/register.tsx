@@ -36,7 +36,7 @@ export default function Register(){
         console.log("Form submitted!");
     
         try {
-          const res = await axiosInstance.post(`${API_URL}/add_user`, {
+          const res = await axiosInstance.post(`/add_user`, {
             given_name: givenName,
             last_name: lastName,
             phone_number: phoneNumber,

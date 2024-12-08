@@ -26,6 +26,7 @@ export default function Home() {
     job_link: string;
     job_image: string;
     company_name: string;
+    compatibility_score?: number; 
   
   }
 
@@ -56,8 +57,7 @@ export default function Home() {
       try {
         console.log("TOKEN", token);
         console.log("user_id:", user_id);
-        console.log("new user_id:", userId);
-        const res = await axiosInstance.put(`/apply_job`, {
+        const res = await axiosInstance.post(`/apply_job`, {
           user_id: user_id, 
           job_id: job_id,
         }, {
@@ -99,12 +99,12 @@ export default function Home() {
  
       console.log(res.data); 
 
-      if (res.data.outjobs) {
-        setOutList(res.data.outjobs);
+      if (res.data.jobs) {
+        setOutList(res.data.jobs);
+
       } else {
         console.error("No token received");
       
-
       }
 
     } catch (error) {
@@ -212,10 +212,10 @@ export default function Home() {
                   <div className="job-icon-wrapper">
                     <div key={index} className="job-icon">
             
-                        <Image
+                        <img
                           aria-hidden
                           src={`${item.job_image}`}
-                          alt={`/${item.company_name} logo`}
+                          alt={`${item.company_name} logo`}
                           width={32}
                           height={32}
                         />
